@@ -8,7 +8,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
   config.vm.box = "precise32"
   config.vm.network "private_network", ip: "192.168.7.7"
-  config.vm.synced_folder ".", "/sml"
+  config.vm.synced_folder "src", "/sml"
 
 
   config.vm.provider "virtualbox" do |vb|
