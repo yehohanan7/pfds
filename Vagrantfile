@@ -7,8 +7,9 @@ VAGRANTFILE_API_VERSION = "2"
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box_url = "http://files.vagrantup.com/precise32.box"
   config.vm.box = "precise32"
-  config.vm.network "private_network", ip: "192.168.111.222"
-  config.vm.synced_folder ".", "/home/vagrant"
+  config.vm.network "private_network", ip: "192.168.7.7"
+  config.vm.synced_folder ".", "/sml"
+
 
   config.vm.provider "virtualbox" do |vb|
     vb.customize ["modifyvm", :id, "--memory", "2048", "--cpus", "2"]
