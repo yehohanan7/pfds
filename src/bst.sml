@@ -6,6 +6,14 @@ sig
     val leq : T * T -> bool
 end
 
+structure IntOrdered : ORDERED = struct
+  type T = int
+  val eq = (op =)
+  val lt = (op <)
+  val leq = (op <=)
+end
+
+    
 signature SET =
 sig
     type Elem
@@ -15,12 +23,11 @@ sig
     val member : Elem * Set -> bool
 end
 
-functor UnbalancedSet(Element : ORDERED) : SET =
-struct
+functor UnbalancedSet(Element : ORDERED) : SET where type Elem = Element.T = struct
+
   type Elem = Element.T
   datatype Tree = E | T of Tree * Elem * Tree
   type Set = Tree
-                 
   val empty = E
                   
   fun member (x, E) = false
@@ -36,14 +43,7 @@ struct
       else s
 end
     
-structure Value :> ORDERED =
-struct
-  type T = int
-  val eq = (op =)
-  val lt = (op <)
-  val leq = (op <=)
-end
 
-structure IntTree = UnbalancedSet(Value);
+structure IntTree = UnbalancedSet (IntOrdered);
 
 IntTree.insert (5, IntTree.empty);
