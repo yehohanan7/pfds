@@ -1,10 +1,5 @@
-signature ORDERED =
-sig
-    type T
-    val eq : T * T -> bool
-    val lt : T * T -> bool
-    val leq : T * T -> bool
-end
+use "ordered.sml";
+use "set.sml";
 
 structure IntOrdered : ORDERED = struct
   type T = int
@@ -14,15 +9,6 @@ structure IntOrdered : ORDERED = struct
 end
 
     
-signature SET =
-sig
-    type Elem
-    type Set
-    val empty : Set
-    val insert : Elem * Set -> Set
-    val member : Elem * Set -> bool
-end
-
 functor UnbalancedSet(Element : ORDERED) : SET where type Elem = Element.T = struct
 
   type Elem = Element.T
